@@ -2,7 +2,7 @@ import pytest
 import json
 import os
 import tempfile
-from app import app
+from app.app import app
 
 
 @pytest.fixture
