@@ -84,4 +84,5 @@ jobs:
           echo "  2. SSH to server and run: docker compose up -d"
           echo "  3. Wait for health check to pass"
           echo "  4. Send Slack/email notification"
+          B
           echo "Deploy complete!"
