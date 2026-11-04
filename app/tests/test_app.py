@@ -1,22 +1,22 @@
 import json
 import pytest
-import app as app_module
-from app import app
+import app.app as app_module
+
+flask_app = app_module.app
 
 
 @pytest.fixture
 def client(tmp_path, monkeypatch):
     data_file = str(tmp_path / "tasks.json")
 
-    app.config["TESTING"] = True
+    flask_app.config["TESTING"] = True
     # Works if app.py reads the env var at request time
     monkeypatch.setenv("DATA_FILE", data_file)
     # Works if app.py captured it in a module-level constant at import time
     monkeypatch.setattr(app_module, "DATA_FILE", data_file, raising=False)
 
-    with app.test_client() as c:
+    with flask_app.test_client() as c:
         yield c
-    # tmp_path and monkeypatch clean up automatically
 
 
 def create_task(client, title):
